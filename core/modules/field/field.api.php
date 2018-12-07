@@ -232,6 +232,64 @@ function hook_field_widget_WIDGET_TYPE_form_alter(&$element, \Drupal\Core\Form\F
 }
 
 /**
+ * Alter forms for field widgets container provided by other modules.
+ *
+ * @param $element
+ *   The field widget form element as constructed by
+ *   \Drupal\Core\Field\WidgetBaseInterface::form().
+ * @param $form_state
+ *   The current state of the form.
+ * @param $context
+ *   An associative array containing the following key-value pairs:
+ *   - form: The form structure to which widgets are being attached. This may be
+ *     a full form structure, or a sub-element of a larger form.
+ *   - widget: The widget plugin instance.
+ *   - items: The field values, as a
+ *     \Drupal\Core\Field\FieldItemListInterface object.
+ *   - delta: The order of this item in the array of subelements (0, 1, 2, etc).
+ *   - default: A boolean indicating whether the form is being shown as a dummy
+ *     form to set default values.
+ *
+ * @see \Drupal\Core\Field\WidgetBaseInterface::form()
+ * @see \Drupal\Core\Field\WidgetBase::form()
+ * @see hook_field_widget_WIDGET_TYPE_form_container_alter()
+ */
+function hook_field_widget_form_container_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $element['#attributes']['class'][] = 'myclass';
+}
+
+/**
+ * Alter forms for field widgets container provided by other modules.
+ *
+ * Modules can implement hook_field_widget_WIDGET_TYPE_form_container_alter()
+ * to modify a specific widget form, rather than using
+ * hook_field_widget_form_container_alter() and checking the widget type.
+ *
+ * @param $element
+ *   The field widget form element as constructed by
+ *   \Drupal\Core\Field\WidgetBaseInterface::form().
+ * @param $form_state
+ *   The current state of the form.
+ * @param $context
+ *   An associative array containing the following key-value pairs:
+ *   - form: The form structure to which widgets are being attached. This may be
+ *     a full form structure, or a sub-element of a larger form.
+ *   - widget: The widget plugin instance.
+ *   - items: The field values, as a
+ *     \Drupal\Core\Field\FieldItemListInterface object.
+ *   - delta: The order of this item in the array of subelements (0, 1, 2, etc).
+ *   - default: A boolean indicating whether the form is being shown as a dummy
+ *     form to set default values.
+ *
+ * @see \Drupal\Core\Field\WidgetBaseInterface::form()
+ * @see \Drupal\Core\Field\WidgetBase::form()
+ * @see hook_field_widget_form_container_alter()
+ */
+function hook_field_widget_WIDGET_TYPE_form_container_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $element['#attributes']['class'][] = 'myclass';
+}
+
+/**
  * Alter forms for multi-value field widgets provided by other modules.
  *
  * To alter the individual elements within the widget, loop over
